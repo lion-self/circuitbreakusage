@@ -1,0 +1,23 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failureRateThreshold: 60 # 以百分比配置失败率阈值。当失败率等于或大于阈值时，断路器状态并关闭变为开启，并进行服务降级。
+        slowCallRateThreshold: 100 # 以百分比的方式配置，断路器把调用时间大于`slowCallDurationThreshold`的调用视为慢调用，当慢调用比例大于等于阈值时，断路器开启，并进行服务降级。
+        slowCallDurationThreshold: 2000 # 配置调用时间的阈值，高于该阈值的呼叫视为慢调用，并增加慢调用比例，单位：ms
+        permittedNumberOfCallsInHalfOpenState: 10 # 断路器在半开状态下允许通过的调用次数。
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10 # 配置滑动窗口的大小
+        minimumNumberOfCalls: 10 # 在CircuitBreaker可以计算错误率之前，所需的最小呼叫数（每个滑动窗口时段）。
+        waitDurationInOpenState: 10000 # 熔断器从打开到半开需要的时间 单位：ms
+        automaticTransitionFromOpenToHalfOpenEnabled: false # 是否自动从打开到半开，不需要触发，为false表示需要请求触发
+    instances:
+      backendA:
+        baseConfig: default
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+  bulkhead:
+    instances:
+      backendA:
+        maxWaitDuration: 0
+        maxConcurrentCalls: 10
