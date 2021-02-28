@@ -1,4 +1,4 @@
-package com.lion.resilience4j.controller;
+package com.lion.controller;
 
 import com.lion.normal.bean.TestBean;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,4 +25,10 @@ public class TestController {
         return testMO;
     }
 
+    @GetMapping("/something2")
+    public TestBean doSomething() {
+        TestBean testMO = new TestBean();
+        testMO.setStatus(TestBean.SUCCESS_CODE);
+        return testMO;
+    }
 }

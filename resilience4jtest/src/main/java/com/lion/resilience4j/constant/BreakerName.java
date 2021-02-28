@@ -6,4 +6,5 @@ public class BreakerName {
     }
 
     public static final String BACKEND_A = "backendA";
+    public static final String BACKEND_B = "backendB";
 }

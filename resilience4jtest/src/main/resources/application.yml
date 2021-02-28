@@ -16,6 +16,10 @@ resilience4j:
         baseConfig: default
         failureRateThreshold: 50
         minimumNumberOfCalls: 5
+      backendB:
+        baseConfig: default
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
   bulkhead:
     instances:
       backendA:
